@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tv-stream
+  labels:
+    app: tv-stream
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tv-stream
+  template:
+    metadata:
+      labels:
+        app: tv-stream
+    spec:
+      containers:
+        - name: tv-stream
+          image: ghcr.io/zaentrum/tv-stream:latest
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi

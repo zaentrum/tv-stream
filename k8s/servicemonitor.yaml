@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: tv-stream
+  labels:
+    app: tv-stream
+    prometheus: platform
+spec:
+  selector:
+    matchLabels:
+      app: tv-stream
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s

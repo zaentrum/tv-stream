@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tv-stream
+  labels:
+    app: tv-stream
+spec:
+  type: ClusterIP
+  selector:
+    app: tv-stream
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
